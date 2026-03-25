@@ -1,3 +1,28 @@
 #!/usr/bin/env ruby
 
-require "tvshow_wrapper"
+require_relative "../lib/tvshow_wrapper"
+
+client = TvshowWrapper.client
+
+command = ARGV[0]
+query   = ARGV[1]
+
+case command
+when "search"
+  shows = client.search(query)
+  shows.each { |s| puts s }
+
+when "show"
+  show = client.find(query)
+  puts show
+
+when "episodes"
+  episodes = client.episodes(query)
+  episodes.each { |e| puts e }
+
+else
+  puts "Usage:"
+  puts "  bin/tvshow_wrapper search \"Show Name\""
+  puts "  bin/tvshow_wrapper show ID"
+  puts "  bin/tvshow_wrapper episodes SHOW_ID"
+end
