@@ -10,7 +10,7 @@ module TvshowWrapper
     end
 
     def to_s
-      "#{name} (#{rating  "N/A"})"
+      "#{id}. #{name} (#{rating || "N/A"}) #{ genres.any? ? "- #{genres.join(", ") }" : "N/A" }"
     end
   end
 end
