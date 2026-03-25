@@ -1,8 +1,11 @@
-# frozen_string_literal: true
-
-require_relative "tvshow_wrapper/version"
+require_relative "tvshow_wrapper/request"
+require_relative "tvshow_wrapper/client"
+require_relative "tvshow_wrapper/show"
+require_relative "tvshow_wrapper/episode"
+require_relative "tvshow_wrapper/errors"
 
 module TvshowWrapper
-  class Error < StandardError; end
-  # Your code goes here...
+  def self.client
+    @client ||= Client.new
+  end
 end
