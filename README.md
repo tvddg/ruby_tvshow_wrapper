@@ -1,28 +1,72 @@
 # TvshowWrapper
 
-TODO: Delete this and the text below, and describe your gem
+TvshowWrapper is a simple Ruby gem that provides a convenient wrapper around the TVMaze for working with TV shows.
+The gem allows you to:
+- search for shows by name
+- fetch show details by ID
+- retrieve a list of episodes
+It abstracts away HTTP requests and JSON parsing, giving you a clean Ruby interface.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/tvshow_wrapper`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-## Installation
-
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
-
-Install the gem and add to the application's Gemfile by executing:
-
-```bash
-bundle add UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-```bash
-gem install UPDATE_WITH_YOUR_GEM_NAME_IMMEDIATELY_AFTER_RELEASE_TO_RUBYGEMS_ORG
-```
 
 ## Usage
 
-TODO: Write usage instructions here
+### Initialize client
+```ruby
+require 'tvshow_wrapper'
+
+client = TvshowWrapper.client
+```
+
+### Search for shows
+```ruby
+shows = client.search("Breaking Bad")
+
+shows.each do |show|
+  puts show
+end
+```
+
+Example output
+```1. Breaking Bad (9.5) - Drama```
+
+### Find show by ID
+```Ruby
+show = client.find(82)
+
+puts show.name # => "Sherlock"
+```
+
+### Get episodes
+```Ruby
+episodes = client.episodes(82)
+
+episodes.each do |episode|
+  puts episode
+end
+```
+
+Example output:
+```
+S1E1 - A Study in Pink
+S1E2 - The Blind Banker
+```
+
+### Error handling
+```Ruby
+begin
+  client.find(999999999)
+rescue TvshowWrapper::Error => e
+  puts "Error: #{e.message}"
+end
+```
+
+### CLI usage
+```Bash
+bin/tvshow_wrapper search "Breaking Bad"
+bin/tvshow_wrapper show 82
+bin/tvshow_wrapper episodes 82
+```
+
 
 ## Development
 
@@ -32,7 +76,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/tvshow_wrapper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/tvddg/tvshow_wrapper.
 
 ## License
 
