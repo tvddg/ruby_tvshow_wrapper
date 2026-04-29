@@ -28,4 +28,3 @@ class ShowTest < Minitest::Test
     assert_equal "1. Breaking Bad (9.5) - Drama\nBreaking Bad follows protagonist Walter White, a chemistry teacher who lives in New Mexico with his wife and teenage son who has cerebral palsy.\nImage URL: /some/url/blablabla", @show.to_s
   end
 end
-﻿
