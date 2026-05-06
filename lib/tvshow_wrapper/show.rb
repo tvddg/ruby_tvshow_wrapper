@@ -26,6 +26,20 @@ module TvshowWrapper
         .split(".")
         .first(3)
         .join(".") + "."
+      "#{id}. #{name} (#{rating || "N/A"}) #{ genres.any? ? "- #{genres.join(", ") }" : "N/A" }\n#{summary || "N/A"}\nImage URL: #{image || "N/A"}"
+    end
+
+    def prepare(text)
+        return nil if text.nil? || text.strip.empty?
+
+        text
+        .gsub(/<[^>]*>/, '')   
+        .gsub('&amp;', '&')
+        .gsub('&nbsp;', ' ')
+        .strip
+        .split(".")
+        .first(3)
+        .join(".") + "."
     end
   end
 end
